@@ -22,6 +22,11 @@ import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
 
+function nativeRaknetAvailable() {
+  try { require("raknet-native"); return true; } catch { return false; }
+}
+const USE_NATIVE_RAKNET = nativeRaknetAvailable();
+
 function loadBdp() {
   try { return require("bedrock-protocol"); }
   catch { fatal("bedrock-protocol not found.\nRun: npm install  (inside the mc-builder-bot folder)"); }
@@ -315,7 +320,8 @@ async function handleConnect(args) {
   print("Connecting to " + host + ":" + port + " as \"" + user + "\"...");
 
   const bdp = loadBdp();
-  const client = bdp.createClient({ host, port, username: user, offline: true });
+  const raknetBackend = USE_NATIVE_RAKNET ? "raknet-native" : "jsp-raknet";
+  const client = bdp.createClient({ host, port, username: user, offline: true, raknetBackend });
   state.client = client;
 
   client.on("spawn", () => {

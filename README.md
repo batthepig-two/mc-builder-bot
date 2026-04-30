@@ -89,30 +89,11 @@ node bot.mjs
 
 ---
 
-### iOS — a-shell
-
-[a-shell](https://apps.apple.com/app/a-shell/id1473805438) is a free terminal app for iPhone and iPad with built-in Node.js.
-
-```
-git clone https://github.com/batthepig-two/mc-builder-bot.git
-```
-```
-cd mc-builder-bot
-```
-```
-npm install
-```
-```
-node bot.mjs
-```
-
-> To use a `.litematic` file on iOS: share it into a-shell via the Files app, then reference it with `/upload ~/Documents/myfile.litematic`.
-
----
-
 ### Android — Termux
 
 [Termux](https://f-droid.org/en/packages/com.termux/) is a free Linux terminal for Android.
+
+Most Android devices use ARM processors, so the native networking module won't have a matching binary. Use `--ignore-scripts` to skip the failing build step:
 
 ```
 pkg update && pkg install nodejs git
@@ -124,11 +105,16 @@ git clone https://github.com/batthepig-two/mc-builder-bot.git
 cd mc-builder-bot
 ```
 ```
-npm install
+npm install --ignore-scripts
+```
+```
+node install-fix.cjs
 ```
 ```
 node bot.mjs
 ```
+
+> `--ignore-scripts` skips a native build step that fails on ARM. `install-fix.cjs` patches the networking library to use a pure-JS fallback instead. The bot works the same way — no features are lost.
 
 ---
 
@@ -144,11 +130,16 @@ curl -O https://raw.githubusercontent.com/batthepig-two/mc-builder-bot/main/bot.
 curl -O https://raw.githubusercontent.com/batthepig-two/mc-builder-bot/main/package.json
 ```
 ```
+curl -O https://raw.githubusercontent.com/batthepig-two/mc-builder-bot/main/install-fix.cjs
+```
+```
 npm install
 ```
 ```
 node bot.mjs
 ```
+
+> On mobile / ARM devices where `npm install` fails, use `npm install --ignore-scripts && node install-fix.cjs` instead.
 
 ---
 
