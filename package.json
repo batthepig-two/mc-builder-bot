@@ -1,0 +1,11 @@
+{
+  "name": "mc-builder-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Minecraft Bedrock Builder Bot — build .litematic schematics from any terminal",
+  "main": "bot.mjs",
+  "dependencies": {
+    "bedrock-protocol": "^3.55.1",
+    "prismarine-nbt": "^2.6.1"
+  }
+}
