@@ -126,6 +126,29 @@ No `pip install` needed — the Python bot has **zero external dependencies**.
 
 ---
 
+### iOS — iSH (Python version)
+
+[iSH](https://apps.apple.com/app/ish-shell/id1436902243) is a free Linux emulator (Alpine Linux) for iPhone and iPad. Node.js crashes in iSH due to x86 emulation limitations, so use the Python version:
+
+```
+apk add python3 git
+```
+```
+git clone https://github.com/batthepig-two/mc-builder-bot.git
+```
+```
+cd mc-builder-bot
+```
+```
+python3 bot.py
+```
+
+> **Note:** iSH is slower than a-shell because it emulates x86. The bot will still work, but startup and commands may take a moment.
+
+> **How it works:** Same as a-shell — the bot starts a WebSocket server. In Minecraft chat, type `/wsserver ws://<your-phone-ip>:19131` to connect. Your phone and game device must be on the same Wi-Fi network.
+
+---
+
 ### Android — Termux
 
 [Termux](https://f-droid.org/en/packages/com.termux/) is a free Linux terminal for Android.
