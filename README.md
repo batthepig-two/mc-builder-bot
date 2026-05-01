@@ -8,7 +8,8 @@ The bot must be **opped** on the server (`/op BuildBot`) to run `/setblock` comm
 
 ## Requirements
 
-- **Node.js v18 or newer**
+- **Node.js v18 or newer** (for `bot.mjs` — desktop/server use)
+- **Python 3** (for `bot.py` — iOS a-shell use, no install needed)
 - A Minecraft Bedrock server reachable over a network (see [Connecting](#connecting-to-your-world))
 - A `.litematic` file exported from [Litematica](https://www.curseforge.com/minecraft/mc-mods/litematica)
 
@@ -91,22 +92,20 @@ node bot.mjs
 
 ### iOS — a-shell
 
-[a-shell](https://apps.apple.com/app/a-shell/id1473805438) is a free terminal app for iPhone and iPad with built-in Node.js.
+`bot.py` is a Python version of the bot that talks to a deployed copy of the API server. Python is built into [a-shell](https://apps.apple.com/app/a-shell/id1473805438) — no install needed.
+
+You will need the URL of your deployed API server (e.g. `https://yourapp.replit.app`).
 
 ```
-git clone https://github.com/batthepig-two/mc-builder-bot.git
+curl -O https://raw.githubusercontent.com/batthepig-two/mc-builder-bot/main/bot.py
 ```
 ```
-cd mc-builder-bot
-```
-```
-npm install
-```
-```
-node bot.mjs
+python3 bot.py https://yourapp.replit.app
 ```
 
-> To use a `.litematic` file on iOS: share it into a-shell via the Files app, then reference it with `/upload ~/Documents/myfile.litematic`.
+Once running, all the same commands work (`/connect`, `/upload`, `/build`, etc.). The bot logic runs on the server — your phone just sends instructions.
+
+> To use a `.litematic` file on iOS: share it into a-shell via the Files app (tap Share → a-shell), then reference it with `/upload ~/Documents/myfile.litematic`.
 
 ---
 
